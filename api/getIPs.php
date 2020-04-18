@@ -43,21 +43,21 @@ if ($isIP) {
       }
     }
   
-  $sql = "SELECT ip_addr,dns_name FROM ipaddresses WHERE ip_addr!='0' AND subnetId=$subid";
+  $sql = "SELECT ip_addr,hostname FROM ipaddresses WHERE ip_addr!='0' AND subnetId=$subid";
   if ($result = $data->query($sql)) {
     while($obj = $result->fetch_object()){
       $IP_AD = long2ip($obj->ip_addr);
-      $dns_data[$obj->dns_name] = $IP_AD;
+      $dns_data[$obj->hostname] = $IP_AD;
       }
     }
   } else {
-    $sql = "SELECT ip_addr,dns_name FROM ipaddresses WHERE ip_addr!='0' AND dns_name LIKE '%$domain'";
+    $sql = "SELECT ip_addr,hostname FROM ipaddresses WHERE ip_addr!='0' AND hostname LIKE '%$domain'";
     $dns_data = array();
 
     if ($result = $data->query( $sql )) {
       while($obj = $result->fetch_object()){
         $IP_AD = long2ip($obj->ip_addr);
-        $dns_data[$obj->dns_name] = $IP_AD;
+        $dns_data[$obj->hostname] = $IP_AD;
       }
     }
   }

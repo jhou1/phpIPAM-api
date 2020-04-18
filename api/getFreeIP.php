@@ -49,7 +49,7 @@ if ($data->connect_errno) {
 }
 
 # Check for existing hostname entry in IPAM
-$host_query = $data->prepare("select `ip_addr` from `ipaddresses` where `dns_name` = ?");
+$host_query = $data->prepare("select `ip_addr` from `ipaddresses` where `hostname` = ?");
 $host_query->bind_param('s', $_REQUEST['host']);
 $host_query->execute();
 $host_query->bind_result($exist);
@@ -83,7 +83,7 @@ $firstfree = transform2long($first);
 
 # Build query to insert new host in DB
 $query = <<< EOQ
-INSERT INTO `ipaddresses` (`subnetId`,`description`,`ip_addr`,`dns_name`,`mac`,`owner`,`state`,
+INSERT INTO `ipaddresses` (`subnetId`,`description`,`ip_addr`,`hostname`,`mac`,`owner`,`state`,
 `switch`,`port`,`note`,`excludePing`) VALUES
 ('$subnetId','$desc','$first','$host','','$owner','1','','','','0');
 EOQ;

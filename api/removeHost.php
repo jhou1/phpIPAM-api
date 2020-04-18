@@ -42,14 +42,14 @@ if ($data->connect_errno) {
   exit();
 }
 
-$sql = "SELECT ip_addr,dns_name FROM ipaddresses WHERE dns_name='$name'";
+$sql = "SELECT ip_addr,hostname FROM ipaddresses WHERE hostname='$name'";
 $result = $data->query($sql);
 if ($result->num_rows > 0) {
   while($row = $result->fetch_assoc()) {
-    $dns = $row[dns_name];
+    $dns = $row[hostname];
     $ip_add = long2ip($row[ip_addr]);
   }
-  $sql_del = "DELETE FROM ipaddresses WHERE dns_name='$name'";
+  $sql_del = "DELETE FROM ipaddresses WHERE hostname='$name'";
   $del_result = $data->query($sql_del);
   if ($del_result) {
     print "Deleted $dns with IP $ip_add from IPAM\n";
