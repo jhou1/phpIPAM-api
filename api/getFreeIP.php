@@ -15,7 +15,7 @@
 
 # include needed functions
 include_once '../config.php';
-include_once '../functions/functions.php';
+include_once './v1/functions/functions.php';
 include_once 'tokenValid.php';
 
 # Set up variables and change subnet to long
